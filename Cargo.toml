@@ -1,0 +1,27 @@
+[package]
+name = "acrlogin"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+simplelog = "0.11.2"
+log = "0.4.16"
+azure_security_keyvault = { path = "./externals/azure-sdk-for-rust/sdk/security_keyvault", version = "0.5"}
+azure_identity = { path = "./externals/azure-sdk-for-rust/sdk/identity", version = "0.6", features= ["client_certificate", "vendored-openssl"]}
+azure_core = { path = "./externals/azure-sdk-for-rust/sdk/core", version = "0.5"}
+azure_mgmt_compute = { version = "0.4", features = ["enable_reqwest", "package-2021-12-01"], default-features = false }
+clap = { version = "3.1.6", features = ["derive"] }
+tokio = { version = "1.17.0", features = ["full"] }
+reqwest = { version = "0.11", features = ["json"] }
+regex = "1"
+base64 = "0.13"
+serde = "1.0"
+serde_json = "1.0"
+quick-xml = { version = "0.22", features = [ "serialize" ] }
+hex = "0.4.3"
+url = "2.2.2"
+http = "0.2.6"
+time = "0.3"
+ssh-keys = "0.1.4"

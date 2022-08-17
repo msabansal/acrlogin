@@ -1,0 +1,67 @@
+name: CD
+
+on:
+  push:
+   tags:
+     - '*'
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v2.4.2
+      with:
+        submodules: 'recursive'
+    - name: Get version
+      id: get_version
+      run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        components: clippy
+
+    - name: Run tests
+      run: cargo test --release
+
+    - name: Setup MUSL
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        rustup target add x86_64-unknown-linux-musl
+        sudo apt-get -qq install musl-tools
+
+    - name: Build Release
+      run: cargo build --release
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./target/release/acrlogin*
+          
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: Bump personal tap formula
+    #   uses: mislav/bump-homebrew-formula-action@v1
+    #   if: "matrix.os == 'macos-latest' && !contains(github.ref, '-')" # skip prereleases
+    #   env:
+    #     COMMITTER_TOKEN: ${{ secrets.BREW_TOKEN }}
+    #   with:
+    #     formula-name: gitui
+    #     homebrew-tap: extrawurst/tap
+    #     download-url: https://github.com/extrawurst/gitui/releases/download/${{ steps.get_version.outputs.version }}/gitui-mac.tar.gz
+
+    # - name: Bump homebrew-core formula
+    #   uses: mislav/bump-homebrew-formula-action@v1
+    #   if: "matrix.os == 'macos-latest' && !contains(github.ref, '-')" # skip prereleases
+    #   env:
+    #     COMMITTER_TOKEN: ${{ secrets.BREW_TOKEN }}
+    #   with:
+    #     formula-name: gitui
