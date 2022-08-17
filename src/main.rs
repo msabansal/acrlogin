@@ -8,7 +8,7 @@ use acrlogin::{acr_client::AcrClient, Result};
 use azure_security_keyvault::KeyvaultClient;
 use log::*;
 use simplelog::{Config, SimpleLogger};
-use tokio::{io::AsyncWriteExt, process::Command, spawn, task::JoinHandle};
+use tokio::{io::AsyncWriteExt, process::Command};
 
 async fn get_certficate(vault_name: &str, certificate_name: &str) -> Result<Vec<u8>> {
     let creds = Arc::new(DefaultAzureCredential::default());
