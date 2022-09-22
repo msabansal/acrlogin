@@ -41,15 +41,9 @@ jobs:
     - name: Build Release
       run: cargo build --release
 
-    - name: Extract release notes
-      if: matrix.os == 'ubuntu-latest'
-      id: release_notes
-      uses: ffurrer2/extract-release-notes@v1
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        body: ${{ steps.release_notes.outputs.release_notes }}
-        prerelease: ${{ contains(github.ref, '-') }}
         files: |
           ./target/release/acrlogin*
           
