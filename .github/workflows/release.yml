@@ -28,7 +28,7 @@ jobs:
         components: clippy
 
     - name: Run tests
-      run: cargo test
+      run: cargo test --release
 
     - name: Setup MUSL
       if: matrix.os == 'ubuntu-latest'
