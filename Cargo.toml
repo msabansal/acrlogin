@@ -8,9 +8,9 @@ edition = "2021"
 [dependencies]
 simplelog = "0.11.2"
 log = "0.4.16"
-azure_security_keyvault = { path = "./externals/azure-sdk-for-rust/sdk/security_keyvault", version = "0.4"}
-azure_identity = { path = "./externals/azure-sdk-for-rust/sdk/identity", version = "0.5", features= ["client_certificate", "vendored-openssl"]}
-azure_core = { path = "./externals/azure-sdk-for-rust/sdk/core", version = "0.4"}
+azure_security_keyvault = { path = "./externals/azure-sdk-for-rust/sdk/security_keyvault", version = "0.5"}
+azure_identity = { path = "./externals/azure-sdk-for-rust/sdk/identity", version = "0.6", features= ["client_certificate", "vendored-openssl"]}
+azure_core = { path = "./externals/azure-sdk-for-rust/sdk/core", version = "0.5"}
 azure_mgmt_compute = { version = "0.4", features = ["enable_reqwest", "package-2021-12-01"], default-features = false }
 clap = { version = "3.1.6", features = ["derive"] }
 tokio = { version = "1.17.0", features = ["full"] }
