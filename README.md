@@ -20,4 +20,5 @@ With this tool you have to setup the permission once and everything will work se
 </code> Assuming your app id is: <code>e7439801-24f9-4583-a3f3-f2e85ab5e8ff</code>
 3. Setup a keyvault(eg: AcrLoginKeyVault) with a certificate (eg: AppCert) that has the certificate above as the subject name and is created by the right certificate authority.
 4. Assign reader access to relevant people and groups to the above certs.
-5. Now everyone who has access to the cert can login to the acr using the following command: <code>acrlogin.exe --vault-name AcrLoginKeyVault --certificate-name AppCert --tenant-id f4740579-2207-4615-a076-746e501c7314 --client-id e7439801-24f9-4583-a3f3-f2e85ab5e8ff -u --acr-name #acr-name# </code>
+5. Grant the app reader permissions on the ACR (https://onebranch.visualstudio.com/OneBranch/_wiki/wikis/OneBranch.wiki/4868/Self-serve-ACR-Access)
+6. Now everyone who has access to the cert can login to the acr using the following command: <code>acrlogin.exe --vault-name AcrLoginKeyVault --certificate-name AppCert --tenant-id f4740579-2207-4615-a076-746e501c7314 --client-id e7439801-24f9-4583-a3f3-f2e85ab5e8ff -u --acr-name #acr-name# </code>
