@@ -30,11 +30,7 @@ jobs:
     - name: Build
       run: cargo build
     - name: Run tests
-      run: make test
-    - name: Run clippy
-      run: |
-        cargo clean
-        make clippy
+      run: cargo test
 
     - name: Setup MUSL
       if: matrix.os == 'ubuntu-latest'
